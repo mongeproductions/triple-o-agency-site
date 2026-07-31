@@ -57,8 +57,8 @@ function body(c) {
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label for="phone" class="block font-heading text-sm font-semibold mb-2">Phone</label>
-                <input id="phone" name="phone" type="tel" autocomplete="tel" class="w-full bg-white border border-deep-green/15 rounded-sm px-4 py-3 text-text-dark focus:border-leather focus:outline-none transition-colors" placeholder="(801) 555-0123" />
+                <label for="phone" class="block font-heading text-sm font-semibold mb-2">Phone <span class="text-leather">*</span></label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" required class="w-full bg-white border border-deep-green/15 rounded-sm px-4 py-3 text-text-dark focus:border-leather focus:outline-none transition-colors" placeholder="(801) 555-0123" />
               </div>
               <div>
                 <label for="company" class="block font-heading text-sm font-semibold mb-2">Company</label>
