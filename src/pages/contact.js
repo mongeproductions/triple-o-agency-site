@@ -57,20 +57,25 @@ function body(c) {
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
+                <label for="phone" class="block font-heading text-sm font-semibold mb-2">Phone</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" class="w-full bg-white border border-deep-green/15 rounded-sm px-4 py-3 text-text-dark focus:border-leather focus:outline-none transition-colors" placeholder="(801) 555-0123" />
+              </div>
+              <div>
                 <label for="company" class="block font-heading text-sm font-semibold mb-2">Company</label>
                 <input id="company" name="company" type="text" class="w-full bg-white border border-deep-green/15 rounded-sm px-4 py-3 text-text-dark focus:border-leather focus:outline-none transition-colors" placeholder="Company name" />
               </div>
-              <div>
-                <label for="interest" class="block font-heading text-sm font-semibold mb-2">I'm interested in</label>
-                <select id="interest" name="interest" class="w-full bg-white border border-deep-green/15 rounded-sm px-4 py-3 text-text-dark focus:border-leather focus:outline-none transition-colors">
-                  <option>SEO</option>
-                  <option>Paid Ads / Lead Gen</option>
-                  <option>Branding & PR</option>
-                  <option>Data & Intent Audiences</option>
-                  <option>Fractional CMO / Consulting</option>
-                  <option>Not sure yet</option>
-                </select>
-              </div>
+            </div>
+
+            <div>
+              <label for="interest" class="block font-heading text-sm font-semibold mb-2">I'm interested in</label>
+              <select id="interest" name="interest" class="w-full bg-white border border-deep-green/15 rounded-sm px-4 py-3 text-text-dark focus:border-leather focus:outline-none transition-colors">
+                <option>SEO</option>
+                <option>Paid Ads / Lead Gen</option>
+                <option>Branding & PR</option>
+                <option>Data & Intent Audiences</option>
+                <option>Fractional CMO / Consulting</option>
+                <option>Not sure yet</option>
+              </select>
             </div>
 
             <div>
