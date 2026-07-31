@@ -1,0 +1,16 @@
+{
+  "name": "triple-o-agency-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Triple O Agency marketing website — static HTML/CSS/JS with Tailwind and GSAP.",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/css/input.css -o ./dist/assets/css/style.css --minify",
+    "watch:css": "tailwindcss -i ./src/css/input.css -o ./dist/assets/css/style.css --watch",
+    "build:html": "node build.js",
+    "build": "npm run build:html && npm run build:css && node copy-assets.js",
+    "serve": "npx --yes http-server dist -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.13"
+  }
+}
