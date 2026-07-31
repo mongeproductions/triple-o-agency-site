@@ -121,9 +121,9 @@ function body(c) {
         <table class="w-full text-left border-collapse min-w-[520px]">
           <thead>
             <tr>
-              <th class="eyebrow py-4 pr-6 border-b border-deep-green/15">Consideration</th>
-              <th class="eyebrow py-4 pr-6 border-b border-deep-green/15">Typical Vendor</th>
-              <th class="eyebrow py-4 border-b border-deep-green/15">Triple O Agency</th>
+              <th class="font-heading font-semibold uppercase text-leather tracking-eyebrow text-xs py-4 pr-6 border-b border-deep-green/15">Consideration</th>
+              <th class="font-heading font-semibold uppercase text-leather tracking-eyebrow text-xs py-4 pr-6 border-b border-deep-green/15">Typical Vendor</th>
+              <th class="font-heading font-semibold uppercase text-leather tracking-eyebrow text-xs py-4 border-b border-deep-green/15">Triple O Agency</th>
             </tr>
           </thead>
           <tbody class="text-text-dark/75">
