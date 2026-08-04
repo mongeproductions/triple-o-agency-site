@@ -55,20 +55,20 @@ function body(c) {
 
               <div class="field">
                 <div class="field-row">
-                  <label for="currentConv">Current conversion rate</label>
-                  <span class="val" id="currentConv-val">2.0%</span>
+                  <label for="currentClose">Current close rate</label>
+                  <span class="val" id="currentClose-val">20%</span>
                 </div>
-                <input type="range" id="currentConv" min="0.5" max="15" step="0.1" value="2" />
-                <div class="range-scale"><span>0.5%</span><span>15%</span></div>
+                <input type="range" id="currentClose" min="5" max="40" step="1" value="20" />
+                <div class="range-scale"><span>5%</span><span>40%</span></div>
               </div>
 
               <div class="field">
                 <div class="field-row">
-                  <label for="expectedConv">Expected conversion rate</label>
-                  <span class="val" id="expectedConv-val">2.5%</span>
+                  <label for="expectedClose">Expected close rate</label>
+                  <span class="val" id="expectedClose-val">25%</span>
                 </div>
-                <input type="range" id="expectedConv" min="0.5" max="25" step="0.1" value="2.5" />
-                <div class="range-scale"><span>0.5%</span><span>25%</span></div>
+                <input type="range" id="expectedClose" min="5" max="50" step="1" value="25" />
+                <div class="range-scale"><span>5%</span><span>50%</span></div>
               </div>
             </div>
 
@@ -119,8 +119,8 @@ function body(c) {
 
             <div class="stat-row">
               <div class="stat" id="stat-breakeven">
-                <span class="label" id="breakeven-label">Break-Even Conversion Rate</span>
-                <span class="num" id="breakeven-num">2.3%</span>
+                <span class="label" id="breakeven-label">Break-Even Close Rate</span>
+                <span class="num" id="breakeven-num">23.1%</span>
                 <span class="sub" id="breakeven-sub">needed for the fee to pay for itself in savings alone</span>
               </div>
               <div class="stat" id="stat-mid">
@@ -344,7 +344,7 @@ function body(c) {
     }
 
     var DEFAULTS = {
-      leads: { spend: 30000, cac: 1500, profit: 6000, currentConv: 2, expectedConv: 2.5 },
+      leads: { spend: 30000, cac: 1500, profit: 6000, currentClose: 20, expectedClose: 25 },
       roas: { spend: 30000, currentRoas: 3, margin: 40, expectedRoas: 5 },
     };
 
@@ -352,8 +352,8 @@ function body(c) {
       spend: document.getElementById('spend'),
       cac: document.getElementById('cac'),
       profit: document.getElementById('profit'),
-      currentConv: document.getElementById('currentConv'),
-      expectedConv: document.getElementById('expectedConv'),
+      currentClose: document.getElementById('currentClose'),
+      expectedClose: document.getElementById('expectedClose'),
       currentRoas: document.getElementById('currentRoas'),
       margin: document.getElementById('margin'),
       expectedRoas: document.getElementById('expectedRoas'),
@@ -376,14 +376,14 @@ function body(c) {
       var spend = spendIndexToValue(els.spend.value);
       var cac = parseFloat(els.cac.value);
       var profit = parseFloat(els.profit.value);
-      var currentConv = parseFloat(els.currentConv.value);
-      var expectedConv = parseFloat(els.expectedConv.value);
-      var improvement = 1 - (currentConv / expectedConv);
+      var currentClose = parseFloat(els.currentClose.value);
+      var expectedClose = parseFloat(els.expectedClose.value);
+      var improvement = 1 - (currentClose / expectedClose);
 
       var customersCurrent = spend / cac;
       var cacNew = cac * (1 - improvement);
       var breakEvenImprovementFrac = AUDIENCE_FEE / spend;
-      var breakEvenConvRate = (spend > AUDIENCE_FEE) ? (currentConv / (1 - breakEvenImprovementFrac)) : Infinity;
+      var breakEvenConvRate = (spend > AUDIENCE_FEE) ? (currentClose / (1 - breakEvenImprovementFrac)) : Infinity;
 
       var customersNew = spend / cacNew;
       var extraCustomers = customersNew - customersCurrent;
@@ -397,20 +397,20 @@ function body(c) {
       var clearsBreakEven = costSavingsSameVolume >= 0;
 
       return {
-        spend: spend, breakEvenPct: breakEvenConvRate, currentMetric: expectedConv,
+        spend: spend, breakEvenPct: breakEvenConvRate, currentMetric: expectedClose,
         netMonthlyBenefit: netMonthlyBenefit, netAnnualBenefit: netAnnualBenefit,
         clearsBreakEven: clearsBreakEven, costSavingsSameVolume: costSavingsSameVolume,
         barCurrentAmt: spend, barCurrentSub: fmtNum(customersCurrent, 1) + ' customers', barCurrentEach: fmtMoney(cac) + ' each',
         barOptAmt: totalCostSameVolume, barOptSub: fmtMoney(mediaNeededSameVolume) + ' media + ' + fmtMoney(AUDIENCE_FEE) + ' audience',
         barOptEach: costSavingsSameVolume >= 0 ? fmtMoney(costSavingsSameVolume) + ' saved' : fmtMoney(-costSavingsSameVolume) + ' above current',
-        breakevenLabel: 'Break-Even Conversion Rate', breakevenNum: isFinite(breakEvenConvRate) ? fmtNum(breakEvenConvRate, 1) + '%' : '—',
+        breakevenLabel: 'Break-Even Close Rate', breakevenNum: isFinite(breakEvenConvRate) ? fmtNum(breakEvenConvRate, 1) + '%' : '—',
         breakevenSubGood: 'cleared — your expected rate covers the fee',
         breakevenSubCaution: 'needed for the fee to pay for itself in savings alone',
         midLabel: 'Projected New CAC', midNum: fmtMoney(cacNew), midSub: fmtMoney(cac - cacNew) + ' less per customer',
         benefitSub: 'growth scenario · annualized ' + fmtMoney(netAnnualBenefit),
         barCurrentLabel: 'Current acquisition program', barOptLabel: 'Same customer volume, optimized',
         takeawayGood: 'This clears break-even — <b>Triple O pays for itself in cost savings alone</b>, saving roughly <b>' + fmtMoney(costSavingsSameVolume) + '/month</b> before counting the <b>' + fmtNum(Math.max(extraCustomers,0),1) + ' additional customer' + (Math.abs(extraCustomers-1)<0.05?'':'s') + '</b> a month worth approximately <b>' + fmtMoney(incrementalProfit) + '</b> in gross profit.',
-        takeawayCaution: 'This hasn’t cleared break-even on cost savings alone at the current conversion rate target — but holding media spend steady adds roughly <b>' + fmtNum(Math.max(extraCustomers,0),1) + ' additional customer' + (Math.abs(extraCustomers-1)<0.05?'':'s') + '</b> a month, worth about <b>' + fmtMoney(netMonthlyBenefit) + '</b> in net monthly gross profit after the audience fee.',
+        takeawayCaution: 'This hasn’t cleared break-even on cost savings alone at the current close rate target — but holding media spend steady adds roughly <b>' + fmtNum(Math.max(extraCustomers,0),1) + ' additional customer' + (Math.abs(extraCustomers-1)<0.05?'':'s') + '</b> a month, worth about <b>' + fmtMoney(netMonthlyBenefit) + '</b> in net monthly gross profit after the audience fee.',
       };
     }
 
@@ -460,8 +460,8 @@ function body(c) {
       if (mode === 'leads') {
         document.getElementById('cac-val').textContent = fmtMoney(parseFloat(els.cac.value));
         document.getElementById('profit-val').textContent = fmtMoney(parseFloat(els.profit.value));
-        document.getElementById('currentConv-val').textContent = fmtNum(parseFloat(els.currentConv.value), 1) + '%';
-        document.getElementById('expectedConv-val').textContent = fmtNum(parseFloat(els.expectedConv.value), 1) + '%';
+        document.getElementById('currentClose-val').textContent = fmtNum(parseFloat(els.currentClose.value), 0) + '%';
+        document.getElementById('expectedClose-val').textContent = fmtNum(parseFloat(els.expectedClose.value), 0) + '%';
       } else {
         document.getElementById('currentRoas-val').textContent = fmtX(parseFloat(els.currentRoas.value));
         document.getElementById('margin-val').textContent = els.margin.value + '%';
