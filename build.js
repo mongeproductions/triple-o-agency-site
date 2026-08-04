@@ -25,6 +25,7 @@ const PAGES = [
   { out: "services/branding/index.html", activeSlug: "services", mod: "services-branding" },
   { out: "services/audience-intent/index.html", activeSlug: "services", mod: "services-audience-intent" },
   { out: "services/audience-intent/visitor-identification/index.html", activeSlug: "services", mod: "services-audience-intent-visitor-id" },
+  { out: "services/audience-intent/cost-benefit-calculator/index.html", activeSlug: "services", mod: "services-audience-intent-calculator" },
   { out: "services/consulting/index.html", activeSlug: "services", mod: "services-consulting" },
   { out: "services/consulting/fractional-cmo/index.html", activeSlug: "services", mod: "services-consulting-fractional-cmo" },
 

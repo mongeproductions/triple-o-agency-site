@@ -39,7 +39,7 @@ function body(c) {
         <div class="card bg-cream sticky top-32">
           <p class="eyebrow mb-4">In Short</p>
           <p class="text-text-dark/70 leading-relaxed">Rising CPAs usually aren't a sign your offer is failing — they're the cost of platforms constantly re-learning who to show it to. An independent signal breaks that cycle.</p>
-          <a href="/contact/" class="btn-primary w-full mt-8">Book a 15-Minute Call</a>
+          <a href="/services/audience-intent/cost-benefit-calculator/" class="btn-primary w-full mt-8">Calculate Your Revenue</a>
         </div>
       </aside>
     </div>
