@@ -55,11 +55,20 @@ function body(c) {
 
               <div class="field">
                 <div class="field-row">
-                  <label for="improvement">Expected CAC improvement</label>
-                  <span class="val" id="improvement-val">20%</span>
+                  <label for="currentConv">Current conversion rate</label>
+                  <span class="val" id="currentConv-val">2.0%</span>
                 </div>
-                <input type="range" id="improvement" min="20" max="80" step="1" value="20" />
-                <div class="range-scale"><span>20%</span><span>80%</span></div>
+                <input type="range" id="currentConv" min="0.5" max="15" step="0.1" value="2" />
+                <div class="range-scale"><span>0.5%</span><span>15%</span></div>
+              </div>
+
+              <div class="field">
+                <div class="field-row">
+                  <label for="expectedConv">Expected conversion rate</label>
+                  <span class="val" id="expectedConv-val">2.5%</span>
+                </div>
+                <input type="range" id="expectedConv" min="0.5" max="25" step="0.1" value="2.5" />
+                <div class="range-scale"><span>0.5%</span><span>25%</span></div>
               </div>
             </div>
 
@@ -110,8 +119,8 @@ function body(c) {
 
             <div class="stat-row">
               <div class="stat" id="stat-breakeven">
-                <span class="label" id="breakeven-label">Break-Even Improvement</span>
-                <span class="num" id="breakeven-num">13.3%</span>
+                <span class="label" id="breakeven-label">Break-Even Conversion Rate</span>
+                <span class="num" id="breakeven-num">2.3%</span>
                 <span class="sub" id="breakeven-sub">needed for the fee to pay for itself in savings alone</span>
               </div>
               <div class="stat" id="stat-mid">
@@ -335,7 +344,7 @@ function body(c) {
     }
 
     var DEFAULTS = {
-      leads: { spend: 30000, cac: 1500, profit: 6000, improvement: 20 },
+      leads: { spend: 30000, cac: 1500, profit: 6000, currentConv: 2, expectedConv: 2.5 },
       roas: { spend: 30000, currentRoas: 3, margin: 40, expectedRoas: 5 },
     };
 
@@ -343,7 +352,8 @@ function body(c) {
       spend: document.getElementById('spend'),
       cac: document.getElementById('cac'),
       profit: document.getElementById('profit'),
-      improvement: document.getElementById('improvement'),
+      currentConv: document.getElementById('currentConv'),
+      expectedConv: document.getElementById('expectedConv'),
       currentRoas: document.getElementById('currentRoas'),
       margin: document.getElementById('margin'),
       expectedRoas: document.getElementById('expectedRoas'),
@@ -366,12 +376,14 @@ function body(c) {
       var spend = spendIndexToValue(els.spend.value);
       var cac = parseFloat(els.cac.value);
       var profit = parseFloat(els.profit.value);
-      var improvementPct = parseFloat(els.improvement.value);
-      var improvement = improvementPct / 100;
+      var currentConv = parseFloat(els.currentConv.value);
+      var expectedConv = parseFloat(els.expectedConv.value);
+      var improvement = 1 - (currentConv / expectedConv);
 
       var customersCurrent = spend / cac;
       var cacNew = cac * (1 - improvement);
-      var breakEvenPct = (AUDIENCE_FEE / spend) * 100;
+      var breakEvenImprovementFrac = AUDIENCE_FEE / spend;
+      var breakEvenConvRate = (spend > AUDIENCE_FEE) ? (currentConv / (1 - breakEvenImprovementFrac)) : Infinity;
 
       var customersNew = spend / cacNew;
       var extraCustomers = customersNew - customersCurrent;
@@ -385,20 +397,20 @@ function body(c) {
       var clearsBreakEven = costSavingsSameVolume >= 0;
 
       return {
-        spend: spend, breakEvenPct: breakEvenPct, currentMetric: improvementPct,
+        spend: spend, breakEvenPct: breakEvenConvRate, currentMetric: expectedConv,
         netMonthlyBenefit: netMonthlyBenefit, netAnnualBenefit: netAnnualBenefit,
         clearsBreakEven: clearsBreakEven, costSavingsSameVolume: costSavingsSameVolume,
         barCurrentAmt: spend, barCurrentSub: fmtNum(customersCurrent, 1) + ' customers', barCurrentEach: fmtMoney(cac) + ' each',
         barOptAmt: totalCostSameVolume, barOptSub: fmtMoney(mediaNeededSameVolume) + ' media + ' + fmtMoney(AUDIENCE_FEE) + ' audience',
         barOptEach: costSavingsSameVolume >= 0 ? fmtMoney(costSavingsSameVolume) + ' saved' : fmtMoney(-costSavingsSameVolume) + ' above current',
-        breakevenLabel: 'Break-Even Improvement', breakevenNum: fmtNum(breakEvenPct, 1) + '%',
-        breakevenSubGood: 'cleared — current improvement covers the fee',
+        breakevenLabel: 'Break-Even Conversion Rate', breakevenNum: isFinite(breakEvenConvRate) ? fmtNum(breakEvenConvRate, 1) + '%' : '—',
+        breakevenSubGood: 'cleared — your expected rate covers the fee',
         breakevenSubCaution: 'needed for the fee to pay for itself in savings alone',
         midLabel: 'Projected New CAC', midNum: fmtMoney(cacNew), midSub: fmtMoney(cac - cacNew) + ' less per customer',
         benefitSub: 'growth scenario · annualized ' + fmtMoney(netAnnualBenefit),
         barCurrentLabel: 'Current acquisition program', barOptLabel: 'Same customer volume, optimized',
         takeawayGood: 'This clears break-even — <b>Triple O pays for itself in cost savings alone</b>, saving roughly <b>' + fmtMoney(costSavingsSameVolume) + '/month</b> before counting the <b>' + fmtNum(Math.max(extraCustomers,0),1) + ' additional customer' + (Math.abs(extraCustomers-1)<0.05?'':'s') + '</b> a month worth approximately <b>' + fmtMoney(incrementalProfit) + '</b> in gross profit.',
-        takeawayCaution: 'This hasn’t cleared break-even on cost savings alone at the current improvement rate — but holding media spend steady adds roughly <b>' + fmtNum(Math.max(extraCustomers,0),1) + ' additional customer' + (Math.abs(extraCustomers-1)<0.05?'':'s') + '</b> a month, worth about <b>' + fmtMoney(netMonthlyBenefit) + '</b> in net monthly gross profit after the audience fee.',
+        takeawayCaution: 'This hasn’t cleared break-even on cost savings alone at the current conversion rate target — but holding media spend steady adds roughly <b>' + fmtNum(Math.max(extraCustomers,0),1) + ' additional customer' + (Math.abs(extraCustomers-1)<0.05?'':'s') + '</b> a month, worth about <b>' + fmtMoney(netMonthlyBenefit) + '</b> in net monthly gross profit after the audience fee.',
       };
     }
 
@@ -448,7 +460,8 @@ function body(c) {
       if (mode === 'leads') {
         document.getElementById('cac-val').textContent = fmtMoney(parseFloat(els.cac.value));
         document.getElementById('profit-val').textContent = fmtMoney(parseFloat(els.profit.value));
-        document.getElementById('improvement-val').textContent = els.improvement.value + '%';
+        document.getElementById('currentConv-val').textContent = fmtNum(parseFloat(els.currentConv.value), 1) + '%';
+        document.getElementById('expectedConv-val').textContent = fmtNum(parseFloat(els.expectedConv.value), 1) + '%';
       } else {
         document.getElementById('currentRoas-val').textContent = fmtX(parseFloat(els.currentRoas.value));
         document.getElementById('margin-val').textContent = els.margin.value + '%';

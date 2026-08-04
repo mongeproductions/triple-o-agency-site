@@ -54,6 +54,7 @@ function body(c) {
         <p>Audience resolution is how fragmented, anonymous behavior — a search here, a competitor site visit there, a product page someone lingered on — gets turned into one real, actionable profile. Instead of a platform guessing at "people who might be interested," you get a specific read on who is actively in-market right now, built from what they actually did, not what a category checkbox says about them.</p>
         <p>This isn't another targeting option inside Meta or Google. It's a layer that sits underneath both — continuously watching real buying behavior across a wide network of sites and search activity, independent of whichever platform you're running ads on that week. When the algorithm changes, this signal doesn't reset, because it was never built on top of the algorithm in the first place.</p>
         <p>The result is simple: instead of "people interested in [category]," you're targeting people who searched for exactly what you sell in the last few days and spent real time comparing it against alternatives. Same ad budget. A completely different starting point.</p>
+        <p>Advertisers who make this switch typically see click-through rates move 30&ndash;40% versus a standard pixel alone &mdash; because the audience being reached actually matches intent, not just a category checkbox.</p>
       </div>
     </div>
   </section>
@@ -133,6 +134,31 @@ function body(c) {
             <tr><td class="py-4 pr-6">Ongoing support</td><td class="py-4 pr-6 text-text-dark/50">Ticket queue</td><td class="py-4 font-semibold text-deep-green">Your account team</td></tr>
           </tbody>
         </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative bg-diagonal-green text-cream section overflow-hidden">
+    <div class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">${c.ringsDecor({ color: "#E8E4D9", opacity: "0.05", size: 640 })}</div>
+    <div class="container-page relative z-10">
+      <div class="max-w-2xl mx-auto text-center mb-14" data-reveal data-reveal-y="20">
+        ${c.eyebrow("What It's Worth", { light: true })}
+        <h2 class="text-3xl sm:text-4xl mt-5 text-balance">Typical outcomes once the signal is live.</h2>
+        <p class="text-cream/65 mt-4 leading-relaxed">Ranges reported across intent-driven audience programs, before we've tuned anything to your account specifically.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-10" data-grid-reveal>
+        <div class="text-center">
+          <p class="font-heading font-bold text-4xl sm:text-5xl text-leather-light" data-count="50" data-count-suffix="%">0</p>
+          <p class="eyebrow-light mt-3">Lower Cost Per Acquisition</p>
+        </div>
+        <div class="text-center">
+          <p class="font-heading font-bold text-4xl sm:text-5xl text-leather-light" data-count="95" data-count-suffix="%">0</p>
+          <p class="eyebrow-light mt-3">Identity Match Rate</p>
+        </div>
+        <div class="text-center">
+          <p class="font-heading font-bold text-4xl sm:text-5xl text-leather-light" data-count="2" data-count-suffix="×">0</p>
+          <p class="eyebrow-light mt-3">Conversion Efficiency</p>
+        </div>
       </div>
     </div>
   </section>
