@@ -57,7 +57,7 @@ function body(c) {
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 gap-0 border-t border-cream/15 mt-16" data-reveal data-reveal-y="16">
-        <div class="py-6 pr-6 border-r border-cream/15"><p class="font-heading font-bold text-2xl">Up to 65%</p><p class="eyebrow-light mt-2">Visitors Identified</p></div>
+        <div class="py-6 pr-6 border-r border-cream/15"><p class="font-heading font-bold text-2xl">75&ndash;95%</p><p class="eyebrow-light mt-2">Visitors Identified</p></div>
         <div class="py-6 pr-6 border-r border-cream/15"><p class="font-heading font-bold text-2xl">&lt; 2 sec</p><p class="eyebrow-light mt-2">Time to Match</p></div>
         <div class="py-6 pr-6 md:border-r border-cream/15"><p class="font-heading font-bold text-2xl">250M+</p><p class="eyebrow-light mt-2">Contacts on File</p></div>
         <div class="py-6"><p class="font-heading font-bold text-2xl">Live</p><p class="eyebrow-light mt-2">Alerts to Your Team</p></div>
@@ -201,7 +201,7 @@ function body(c) {
       </div>
       <div data-reveal-group="visitor-id-faq">
         ${faqItem("How are visitors actually identified?", "We combine first-party signals from your site with a licensed contact and business graph to match anonymous sessions to real people — no forms required from the visitor.")}
-        ${faqItem("What kind of match rate should I expect?", "It depends on your traffic mix, but B2B and professional audiences typically match at the higher end of the range — often well above general consumer traffic.")}
+        ${faqItem("What kind of match rate should I expect?", "Most clients see match rates between 75% and 95%, depending on traffic mix — B2B and professional audiences typically land at the higher end of that range, well above general consumer traffic.")}
         ${faqItem("Is this compliant with privacy regulations?", "Yes. The service is built to operate within GDPR and CCPA requirements, and includes straightforward opt-out handling for visitors who request it.")}
         ${faqItem("How long does setup take?", "Most clients are live within a day of installing the tag. Your Triple O account team handles the alert and CRM configuration alongside you.")}
       </div>
