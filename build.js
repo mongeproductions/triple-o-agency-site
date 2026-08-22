@@ -19,6 +19,7 @@ const PAGES = [
   { out: "services/index.html", activeSlug: "services", mod: "services" },
   { out: "services/seo/index.html", activeSlug: "services", mod: "services-seo" },
   { out: "services/seo/aeo/index.html", activeSlug: "services", mod: "services-seo-aeo" },
+  { out: "services/seo/gbp-reputation/index.html", activeSlug: "services", mod: "services-seo-gbp-reputation" },
   { out: "services/paid-ads/index.html", activeSlug: "services", mod: "services-paid-ads" },
   { out: "services/paid-ads/b2c/index.html", activeSlug: "services", mod: "services-paid-ads-b2c" },
   { out: "services/paid-ads/b2b/index.html", activeSlug: "services", mod: "services-paid-ads-b2b" },

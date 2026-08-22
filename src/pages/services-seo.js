@@ -1,7 +1,8 @@
-function outcomeCard(title, description) {
+function outcomeCard(title, description, link) {
   return `<div class="card bg-white flex flex-col h-full" data-reveal data-reveal-y="24">
     <h3 class="text-lg mb-3">${title}</h3>
-    <p class="text-text-dark/65 leading-relaxed">${description}</p>
+    <p class="text-text-dark/65 leading-relaxed flex-1">${description}</p>
+    ${link ? `<a href="${link.href}" class="inline-flex items-center gap-2 mt-6 font-heading text-sm font-semibold uppercase tracking-wide text-leather hover:gap-3 transition-all duration-200">${link.label} <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 10h11M10.5 4.5 16 10l-5.5 5.5"/></svg></a>` : ""}
   </div>`;
 }
 
@@ -53,7 +54,7 @@ function body(c) {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" data-grid-reveal>
         ${outcomeCard("Technical SEO, Fixed in Real Time", "We monitor your site around the clock and resolve the issues that quietly cap your rankings — broken links, missing schema, duplicate titles, orphaned pages, slow-indexing content.")}
         ${outcomeCard("Content Built From Real Search Demand", "Topical maps and briefs generated from what your market is actually searching for, then produced as long-form pages and on-page updates, reviewed by our team before anything goes live.")}
-        ${outcomeCard("Local Rankings, Managed Everywhere at Once", "Google Business Profile updates, listing accuracy, review responses, and citation building — kept consistent across every location, with heatmap reporting that shows exactly where you rank block by block.")}
+        ${outcomeCard("Local Rankings, Managed Everywhere at Once", "Google Business Profile updates, listing accuracy, review responses, and citation building — kept consistent across every location, with heatmap reporting that shows exactly where you rank block by block.", { label: "See GBP & Reputation", href: "/services/seo/gbp-reputation/" })}
         ${outcomeCard("Authority You Can Point To", "Backlink acquisition and digital PR placements sourced from relevant, vetted publishers — not link farms — plus full visibility into your backlink profile and where competitors are earning links you're not.")}
         ${outcomeCard("Reporting You Can Actually Read", "Dashboards pull straight from Search Console and live rank tracking, prioritized by real impact rather than vanity metrics, so every recommendation ties back to something you can measure.")}
         ${outcomeCard("Built for Where Search Is Headed", "We track and optimize how your brand shows up in ChatGPT, Gemini, and Perplexity — not just Google's ten blue links.")}
@@ -108,6 +109,7 @@ function body(c) {
     <div class="container-page">
       ${c.relatedLinks("Related", [
         { label: "AEO", href: "/services/seo/aeo/" },
+        { label: "GBP & Reputation", href: "/services/seo/gbp-reputation/" },
         { label: "Paid Ads / Lead Gen", href: "/services/paid-ads/" },
         { label: "Data & Intent Audiences", href: "/services/audience-intent/" },
       ])}
